@@ -91,6 +91,17 @@ class HouseholdsController < ApplicationController
     @users = User.all
   end
 
+  def choose
+    # This will render the page where users can choose to create or join a household.
+  end
+
+  def send_request
+    @user = User.find(params[:user_id])
+    # Logic for sending a request to join another user's household (without email for now).
+    # You could store this in a table as a pending request (optional).
+  end
+  
+
   private
 
   def household_params

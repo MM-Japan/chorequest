@@ -19,7 +19,6 @@
     <!-- Stylesheets -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
-
     <!-- JavaScript files -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <%= javascript_include_tag 'https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js' %>
@@ -27,18 +26,30 @@
   </head>
 
   <body>
-    <% if current_page?(root_path) || (controller_name == 'households' && action_name == 'new') || current_user == nil %>
+    <!-- Check if on root or new household page or if user is not logged in -->
+    <% if current_page?(root_path) || (controller_name == 'households' && action_name == 'new') || current_user.nil? %>
       <%= render "shared/flashes" %>
-      <%= yield %>
-    <% else %>
-      <%= render "shared/navbar" %>
-      <%= render "shared/flashes" %>
-      <%= render "shared/navbar_footer" %>
-
-      <div style="padding-right: 8px; padding-left: 8px; padding-bottom: 66px; padding-top: 80px;">
+      <div class="wrapper">
         <%= yield %>
       </div>
-    <% end %>
+    <% else %>
+      <!-- Render navbar only if user is logged in and not on the household choose page -->
+      <% unless controller_name == 'households' && action_name == 'choose' %>
+        <%= render "shared/navbar" %>
+      <% end %>
 
+      <%= render "shared/flashes" %>
+
+      <!-- Render navbar footer only if user has a household -->
+      <% if current_user&.household.present? %>
+        <%= render "shared/navbar_footer" %>
+      <% end %>
+
+      <div style="padding-right: 8px; padding-left: 8px; padding-bottom: 66px; padding-top: 80px;">
+        <div class="wrapper">
+          <%= yield %>
+        </div>
+      </div>
+    <% end %>
   </body>
 </html>
