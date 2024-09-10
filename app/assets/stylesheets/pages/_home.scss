@@ -1,3 +1,9 @@
+.wrapper {
+  max-width: 414px; /* The width of a typical mobile screen */
+  margin: 0 auto; /* Centers the wrapper horizontally */
+  padding: 0; /* Removes any additional padding */
+  overflow-x: hidden; /* Ensures no horizontal scroll */
+}
 
 .homebody {
   display: flex;
