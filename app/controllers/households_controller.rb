@@ -100,6 +100,7 @@ class HouseholdsController < ApplicationController
     # Logic for sending a request to join another user's household (without email for now).
     # You could store this in a table as a pending request (optional).
   end
+  
 
   private
 
