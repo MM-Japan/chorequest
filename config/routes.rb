@@ -18,9 +18,11 @@ Rails.application.routes.draw do
     member do
       post :timetable
       get 'chores'
+      post 'send_request' # To send a request to join an existing household
     end
     collection do
       get :search_users
+      get 'choose' # For the user to choose between creating or joining
     end
   end
 

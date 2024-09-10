@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   def after_sign_up_path_for(resource)
-    choose_household_path
+    choose_households_path
   end
 
   # If you have extra params to permit, append them to the sanitizer.
