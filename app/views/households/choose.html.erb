@@ -1,6 +1,11 @@
-<h1>Choose Household Option</h1>
-
-<div class="actions">
-  <%= link_to "Create a New Household", new_household_path, class: "btn btn-primary" %>
-  <%= link_to "Join an Existing Household", root_path, class: "btn btn-secondary" %>
+<div class="household-show">
+  <h1>Please Choose</h1>
+  <div class="actions">
+    <div class="m-3">
+      <%= link_to "Create a New Household", new_household_path, class: "btn btn-warning" %>
+    </div>
+    <div>
+      <%= link_to "Join an Existing Household", new_household_path, class: "btn btn-primary" %>
+    </div>
+  </div>
 </div>

@@ -15,6 +15,14 @@ class User < ApplicationRecord
     submissions.joins(:task).where(tasks: { frequency: 'daily' }).where(deadline: Date.today)
   end
 
+  def display_photo
+    if photo.attached?
+      photo.key
+    else
+      'app/assets/images/default_profile_picture.png'
+    end
+  end
+
   def weekly_task_submissions_due_this_week
     start_of_week = Date.today.beginning_of_week
     end_of_week = Date.today.end_of_week

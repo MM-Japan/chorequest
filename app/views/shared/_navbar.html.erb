@@ -1,48 +1,52 @@
 <%= turbo_frame_tag :navbar do%>
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <div class="user-profile-achievements">
-      <div class="user-profile-coins d-flex">
-        <%= image_tag("navbar-droplet.png") %>
-        <p> <% if current_user.present? && current_user.points.present?  %>
-            <%= current_user.points %> water
-          <% end %>
-        </p>
-      </div>
-      <div class="user-profile-badges d-flex">
-        <%= image_tag("navbar-flower.png")%>
-        <p> <% if current_user.present? && current_user.badges.present? %>
-            <%= current_user.badges.count %> flowers
+  <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+    <div class="container-fluid">
+      <div class="user-profile-achievements">
+        <div class="user-profile-coins d-flex">
+          <%= image_tag("navbar-droplet.png") %>
+          <p> <% if current_user.present? && current_user.points.present?  %>
+              <%= current_user.points %> water
+            <% end %>
+          </p>
+        </div>
+        <div class="user-profile-badges d-flex">
+          <%= image_tag("navbar-flower.png")%>
+          <p> <% if current_user.present? && current_user.badges.present? %>
+              <%= current_user.badges.count %> flowers
             <% else %>
-            1 flowers
-          <% end %>
-        </p>
+              1 flowers
+            <% end %>
+          </p>
+        </div>
       </div>
-    </div>
-    <div >
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <%= cl_image_tag(current_user.photo.key, class: "avatar", alt: "dropdown menu", style: "width: 40px; height: 40px; margin: 0px;")%>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto">
-          <% if current_user != nil %>
-            <li class="nav-item">
-              <%= link_to "My house", household_path(current_user), class: "nav-link", data: { turbo_frame: "_top"} %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "My page", user_path(current_user), class: "nav-link", data: { turbo_frame: "_top"} %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete, turbo_frame: "_top"}, class: "nav-link" %>
-            </li>
+      <div >
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <% if current_user.photo.attached? %>
+            <%= cl_image_tag(current_user.photo.key, class: "avatar", alt: "dropdown menu", style: "width: 40px; height: 40px; margin: 0px;") %>
           <% else %>
-            <li class="nav-item">
-              <%= link_to "Login", new_user_session_path, class: "nav-link", data: { turbo_frame: "_top"} %>
-            </li>
+            <%= image_tag("default_profile_picture.png", class: "avatar", alt: "dropdown menu", style: "width: 40px; height: 40px; margin: 0px;") %> <!-- Assuming 'default-profile.png' is the default image -->
           <% end %>
-        </ul>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto">
+            <% if current_user != nil %>
+              <li class="nav-item">
+                <%= link_to "My house", household_path(current_user), class: "nav-link", data: { turbo_frame: "_top"} %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "My page", user_path(current_user), class: "nav-link", data: { turbo_frame: "_top"} %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete, turbo_frame: "_top"}, class: "nav-link" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Login", new_user_session_path, class: "nav-link", data: { turbo_frame: "_top"} %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-</div>
 <% end %>
