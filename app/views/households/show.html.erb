@@ -1,7 +1,8 @@
 <div class="household-show">
   <!-- title -->
   <div class="household-show-title" style=" width: 100%;">
-    <h1><%= @household.title %>'s <br/> house <%= link_to '', edit_household_path(current_user.household), class: "fa-solid fa-pen-to-square", style:"font-size: 30px; opacity:50%" %></h1>
+    <h1><%= @household.title %>'s <br/>
+       house <%= link_to '', edit_household_path(current_user.household), class: "fa-solid fa-pen-to-square", style:"font-size: 30px; opacity:50%" %></h1>
   </div>
   <!-- Members section -->
   <div class="household-show-members">
@@ -11,9 +12,13 @@
           <div class="d-flex">
             <div class="user-show-member-profiles">
               <div class="profile-pic-placeholder">
-                <%= cl_image_tag(user.photo.key, class: "profile-pic") %>
+                <% if user.photo.attached? %>
+                  <%= cl_image_tag(user.photo.key, class: "profile-pic") %>
+                <% else %>
+                  <%= image_tag("default_profile_picture.png", class: "profile-pic") %> <!-- Assuming 'default-profile.png' is the default image -->
+                <% end %>
               </div>
-              <p class="mb-0" ><%= user.username %></p>
+              <p class="mb-0"><%= user.username %></p>
             </div>
           </div>
         <% end %>
@@ -64,7 +69,6 @@
 </div>
 <!-- Feed of completed tasks -->
 <div class="submission-container" >
-
   <h2 class="text-center" style="padding-top: 8px; padding-bottom: 8px; font-family: 'Jersey 20'; font-size: 40px; font-style: normal; background-color: #DA75FF; border-top-left-radius: 13px; border-top-right-radius: 13px;">Completed Chores</h2>
   <% if @completed_submissions.any? %>
     <div class="completed-tasks-feed" style="border-radius: 16px;">

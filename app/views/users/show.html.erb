@@ -4,7 +4,11 @@
   </div>
   <div class="user-show-container">
     <div class="user-show-container-profile">
-      <%= cl_image_tag(@user.photo.key) %>
+      <% if @user.photo.attached? %>
+        <%= cl_image_tag(@user.photo.key, alt: "User profile photo") %>
+      <% else %>
+        <%= image_tag("default_profile_picture.png", alt: "Default profile photo") %>
+      <% end %>
       <div class="user-profile-text">
         <h3 class="mb-3"><strong><%= @user.username %></strong></h3>
         <div class="user-profile-achievements">
@@ -38,7 +42,11 @@
           <div class="d-flex">
             <div class="user-show-member-profiles">
               <div class="profile-pic-placeholder">
-                <%= cl_image_tag(user.photo.key, class: "profile-pic") %>
+                <% if user.photo.attached? %>
+                  <%= cl_image_tag(user.photo.key, alt: "User profile photo", class: "profile-pic") %>
+                <% else %>
+                  <%= image_tag("default_profile_picture.png", alt: "Default profile photo", class: "profile-pic") %>
+                <% end %>
               </div>
               <p><%= user.username %></p>
             </div>
